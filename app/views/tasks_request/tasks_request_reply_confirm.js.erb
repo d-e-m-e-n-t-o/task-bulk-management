@@ -1,0 +1,6 @@
+$("#tasks_request_reply_confirm").html("<%= escape_javascript(render 'tasks_request_reply_confirm') %>");
+$("#tasks_request_reply_confirm").modal("show");
+
+$("#tasks_request_reply_confirm,.close").unbind().click(function(){
+	window.location.reload();
+});

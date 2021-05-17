@@ -1,0 +1,60 @@
+
+<% provide(:title, "sign_in") %>
+  <div class="top-container container-fluid">
+  <div class="title"><h1>ログイン</h1></div>
+    <div class="row">
+      <div class="col-3 mx-auto">
+        <div class="box-inner">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="box-name-login">
+              <%= f.label :name, "氏名" %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+            </div>
+            <div class="box-password-login">
+              <div class="a-row">
+                <div class="column-left">
+                  <%= f.label :password, "パスワード" %>
+                </div>
+                <div class="column-right">
+                  <%= link_to "パスワードを忘れた場合", new_user_password_path, remote: true %>
+                </div>
+              </div>
+              <%= f.password_field :password, autocomplete: "current-password" %>
+            </div>
+            <div class="remember">
+              <% if devise_mapping.rememberable? %>
+                <%#= f.check_box :remember_me %>
+                <%#= f.label :remember, "ログインしたままにする" %>
+                <label for="user_remember"><%= f.check_box :remember_me %>ログインしたままにする</label>
+              <% end %>
+            </div>
+
+            <div class="btn-logins">
+              <div>
+                <%= f.submit "ログイン", class: "btn-login"%>
+              </div>
+              <div>
+                <% if devise_mapping.omniauthable? %>
+                  <% resource_class.omniauth_providers.each do |provider| %>
+                    <%= link_to "#{OmniAuth::Utils.camelize(provider)}ログイン", omniauth_authorize_path(resource_name, provider), class: "btn btn-success btn-sm btn-line-login" %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          <div class="box-newusr">
+            <p><span>-------</span> Tas-Kunを初めてご利用ですか？ <span>-------</span></p>
+            <%= link_to "Tas-Kunアカウントを作成", new_user_registration_path %>
+          </div>
+          <div class="legal-text">
+            <a>続行することで、Tas-Kunの<%= link_to "利用規約", "#" %>および<br>
+            <%= link_to "プライバシー規約", "#" %>に同意するものとみなされます。</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--パスワード再設定用モーダルウインドウ表示-->
+<div class="modal fade" id="password-new" tabindex="-1" role="dialog" aria-labelledby="usereditModalLabel" aria-hidden="true"></div>

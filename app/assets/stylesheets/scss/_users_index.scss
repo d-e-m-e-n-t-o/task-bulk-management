@@ -1,0 +1,31 @@
+.users-paginate {
+  display: flex;
+  // justify-content: center; /*左右中央揃え*/
+  align-items: center;     /*上下中央揃え*/
+}
+
+/* 検索フォーム */
+#search-box {
+  outline: 0;
+  height: 35px;
+  padding: 0 10px;
+  max-width: 270px;
+  border-radius: 2px;
+}
+
+#search-btn {
+  height: 35px;
+  left: 200px;
+  border-radius: 2px;
+  font-weight: bold;
+  border: none;
+  margin-bottom: 3px;
+  // margin-right: -13px;
+}
+
+#search-btn:hover {
+  background:#fff;
+  color:#7fbfff;
+}
+
+// border: 1px solid black;

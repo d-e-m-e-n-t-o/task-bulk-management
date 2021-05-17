@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'partial/shim' %>
+  </head>
+
+  <body>
+    <%= render 'partial/header' %>
+    <%= yield %>
+    <div id='remote_container'></div>
+    <!--タスク登録用モーダルウインドウ表示-->
+    <div class="modal fade" id="task-new" tabindex="-1" role="dialog" aria-labelledby="usereditModalLabel" aria-hidden="true"></div>
+  </body>
+</html>

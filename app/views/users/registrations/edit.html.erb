@@ -1,0 +1,52 @@
+<% provide(:title, "user_edit") %>
+<div class="users-container container-fluid">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <div class="title"><h1>アカウント情報編集</h1></div>
+    <div class="row">
+      <div class="registrations col-md-5 mx-auto">
+        <%= render "partial/error_messages", resource: resource %>
+
+        <div class='box-name'>
+          <%= f.label :name, "氏名" %>
+          <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "最大10文字", maxlength: 10 %>
+        </div>
+
+        <div class='box-email'>
+          <%= f.label :email, "メールアドレス" %>
+          <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "xxx@email.com" %>
+        </div>
+
+        <div class='box-position'>
+          <%= f.label :position, "役職" %><br />
+          <%= f.text_field :position, autofocus: true, class: "form-control", autocomplete: "position" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <>Currently waiting confirmation for: <%= resource.unconfirmed_email %></>
+        <% end %>
+
+        <div class="box-password">
+          <%= f.label :password, "パスワード変更" %><i> (変更したい場合)</i>
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "半角英数6文字以上" %>
+        </div>
+
+        <div class="box-password-confirmation">
+          <%= f.label :password_confirmation, "パスワード変更(確認)" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "再度ご入力ください" %>
+        </div>
+
+        <div class="box-current-password">
+          <%= f.label :current_password %> <i>(変更にはパスワードが必要です)</i><br />
+          <%= f.password_field :current_password, autocomplete: "current-password",class: "form-control", placeholder: "必須項目です" %>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="registrations-btns text-right">
+      <%= link_to "キャンセル", user_tasks_path(resource), class: "btn btn-default btn-cancel" %>
+      <%= f.submit "変更する", class: "btn btn-primary btn-edit" %>
+    </div>
+
+  <% end %>
+</div>

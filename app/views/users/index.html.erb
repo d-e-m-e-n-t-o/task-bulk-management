@@ -1,0 +1,73 @@
+<% provide(:title, 'All_Users') %>
+<div class="users-container container-fluid">
+  <div class="title">
+    <% if params[:search].present? %>
+      <h1>検索結果</h1>
+    <% else %>
+      <h1>利用者一覧</h1>
+    <% end %>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="users-paginate col-6">
+        <div class="paginate">
+          <%= paginate @users %>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="user-search float-right">
+          <a id="search">ユーザー名検索</a>
+          <%= form_with url: users_path, method: :get, local: true do |form| %>
+            <%= form.text_field :search, id: "search-box", placeholder: "キーワードを入力" %>
+            <%= form.submit "検索", id: "search-btn", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+        <table class="table table-condensed table-hover" id="table-users">
+          <thead>
+            <tr>
+              <th>管理者権限</th>
+              <th>役職</th>
+              <th>氏名</th>
+              <th>メールアドレス</th>
+              <th>担当タスク数</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <% if user.admin? %>
+                    <span style="font-size: 120%;">✅</span>
+                  <% end %>
+                </td>
+                <td><%= user.position %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td>
+                  <%= user.tasks.where(task_status: "未完了").count %>件
+                </td>
+                <% if current_user.admin? && !current_user?(user) %>
+                  <td>
+                    <%= link_to "編集", edit_user_path(user), remote: true, class: "btn btn-primary btn-sm float-right", id: "users-edit-btn" %>
+                  </td>
+                  <td>
+                    <%= link_to "削除", user, method: :delete, data: { confirm: "#{user.name}を削除してよろしいですか？" }, class: "btn btn-danger btn-sm" %>
+                  </td>
+                <% else %>
+                  <td></td>
+                  <td></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+
+<!--アカウント情報編集用モーダルウインドウ表示-->
+<div class="modal fade" id="user-edit"  tabindex="-1" role="dialog" aria-labelledby="usereditModalLabel" aria-hidden="true"></>

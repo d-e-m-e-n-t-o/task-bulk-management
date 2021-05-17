@@ -1,0 +1,17 @@
+<tbody>
+  <tr>
+    <td><%= User.find(task.client).name if task.client != 0 %></td>
+    <td><%= task.title %></td>
+    <td><%= l(task.end, format: :long) %></td>
+    <td><%= task.progress %>%</td>
+    <td>
+      <div class="task-table-buns float-right">
+        <%= link_to "編集", edit_user_task_path(@user, task.id), remote: true, class: "btn btn-primary btn-sm" %>
+        <% if (task.client == 0) || (@user.id == task.user_id) %>
+          <%= link_to "削除", user_task_path(task.user_id, task.id), method: :delete,data: { confirm: "#{task.title}を削除してよろしいですか？" }, class: "btn btn-danger btn-sm" %>
+        <% end %>
+        <%= link_to "詳細", user_task_path(@user, task.id), remote: true, class: "btn btn-primary btn-sm" %>
+      </div>
+    </td>
+  </tr>
+</tbody>

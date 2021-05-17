@@ -1,0 +1,83 @@
+// Place all the styles related to the tasks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.box-title, .box-details, .box-start, .box-end {
+  margin-bottom: 13px;
+}
+
+.modal-body input textarea select {
+  border-style: none;
+  box-sizing: border-box;
+  height: 31px;
+  border: 1px solid #a6a6a6;
+  box-shadow: 0 1px 0 rgba(0,0,0,.07) inset;
+  border-radius: 3px;
+  padding: 0 7px;
+}
+
+.modal-body label {
+  font-weight: 700;
+  font-size: 13px;
+  padding-left: 2px;
+  padding-bottom: 2px;
+}
+
+.date-start-end {
+  .box-start, .box-end {
+    display: inline-block;
+  }
+}
+
+.select {
+  width: 100px;
+}
+
+.number {
+  width: 100px;
+  margin-left: 20px;
+}
+
+.select-status-progress-request div {
+  display: inline-block;
+}
+
+.box-progress label {
+  margin-left: 20px;
+}
+
+.box-request {
+  margin-left: 20px;
+}
+/* datetimepickerのデザイン */
+.datepicker-days {
+  font-size: 93%;
+}
+.datepicker-days th.dow:first-child,
+.datepicker-days td:first-child {
+  color: #f00;
+}
+.datepicker-days th.dow:last-child,
+.datepicker-days td:last-child {
+  color: #00f;
+}
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+  background-color: #337ab7;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.bootstrap-datetimepicker-widget table td span.active,
+.bootstrap-datetimepicker-widget table td i.active {
+  background-color: #337ab7;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+// .input-group-text {
+//   padding: .2rem .75rem;
+//   font-size: .9rem;
+//   height: calc(1.5em + 2px + 0.5rem);
+// }
+
+/*border: 1px solid black;*/

@@ -1,0 +1,69 @@
+<div class="modal-dialog modal-md modal-dialog-center">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">タスク詳細</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <%= form_with(model: @task, url: user_task_path(@task.user_id, @task.id), local: true, method: :patch) do |f| %>
+      <div class="modal-body">
+        <div class="box-title">
+          <%= f.label :title, "件名", class: "form-control-label" %>
+          <%= f.text_field :title, class: "form-control", placeholder: "最大20文字", maxlength: 20, disabled: true %>
+        </div>
+
+        <div class="box-details">
+          <%= f.label :details, "詳細" %>
+          <%= f.text_area :details, class: "form-control", disabled: true %>
+        </div>
+
+          <div class="date-start-end">
+            <div class="row">
+              <div class="col-6 box-start">
+                <%= f.label :start, "開始日（予定）" %>
+                <div class="input-group date" id="datePicker-start" data-target-input="nearest">
+                <%= f.text_field :start, class: "form-control datetimepicker-input", data: {toggle: "datetimepicker", target: "#datePicker-start"}, disabled: true %>
+                  <div class="input-group-append" data-target="#datePicker-start" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar" readonly="readonly"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 box-end">
+                <%= f.label :end, "完了日（予定）" %>
+                <div class="input-group date" id="datePicker-end" data-target-input="nearest">
+                <%= f.text_field :end, class: "form-control datetimepicker-input", data: {toggle: "datetimepicker", target: "#datePicker-end"}, disabled: true %>
+                  <div class="input-group-append" data-target="#datePicker-end" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar" readonly="readonly"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="select-status-progress-request">
+          <div class="box-task_status">
+            <%= f.label :task_status, "状態" %>
+            <%= f.select(:task_status, [["未完了", "未完了"], ["完了", "完了"]], {include_blank: "選択して下さい"}, class: 'form-control select', disabled: true) %>
+          </div>
+          <div class="box-progress">
+            <%= f.label :progress, "進捗状況" %>
+            <%= f.number_field :progress, min: 0, class: "form-control number", disabled: true %>
+          </div>
+          <span class="align-self-center">%</span>
+
+            <div class="box-request">
+              <%= f.label :user_id, "依頼先" %>
+              <%= f.select(:contractor, [["#{@contractor.name}", "#{@contractor.id}"], ["#{@contractor.name}", "#{@contractor.id}"]], {include_blank: "選択して下さい"}, class: 'form-control', disabled: true) %>
+            </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">
+          戻る
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>

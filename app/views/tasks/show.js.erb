@@ -1,0 +1,7 @@
+$("#task-show").html("<%= escape_javascript(render 'show') %>");
+$("#task-show").modal("show");
+
+$(document).ready(function () {
+  $('#datePicker-start').datetimepicker({locale: 'ja', dayViewHeaderFormat: 'YYYY年M月' ,format: 'YYYY/MM/DD'});
+  $('#datePicker-end').datetimepicker({locale: 'ja', dayViewHeaderFormat: 'YYYY年M月' ,format: 'YYYY/MM/DD'});
+});

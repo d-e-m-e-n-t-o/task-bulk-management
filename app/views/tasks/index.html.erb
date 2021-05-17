@@ -1,0 +1,66 @@
+<% provide(:title, "All_tasks") %>
+<div class="tasks-container container-fluid">
+  <% if @btn_status == 'completed'%>
+    <div class="title"><h1>タスク一覧（完了）</h1></div>
+  <% else %>
+    <div class="title"><h1>タスク一覧（未完了）</h1></div>
+  <% end %>
+  <div class="container">
+    <div class="row">
+      <div class="task-btn">
+        <div class="task-btns">
+          <%= link_to "タスク登録（新規）", new_user_task_path(@user), remote: true, class: "btn btn-primary btn-sm" %>
+          <%= link_to "タスク登録（履歴）", user_tasks_all_history_path(@user), class: "btn btn-primary btn-sm" %>
+          <%= link_to "未完了", user_tasks_path(@user, btn_status: "incomplete"), class: "btn btn-primary btn-sm" %>
+          <%= link_to "完了", user_tasks_path(@user, btn_status: "completed"), class: "btn btn-primary btn-sm" %>
+          <% if current_user.admin? %>
+            <%= link_to "依頼", user_tasks_request_index_path(@user), class: "btn btn-primary btn-sm" %>
+          <% end %>
+        </div>
+        <div class="request-related-info">
+          <% if @request_tasks.count !=0 %>
+            <%= link_to "・依頼されたタスクが #{@request_tasks.count}件あります。", user_tasks_request_reply_path(@user), remote: true, class: "request-alert" %>
+          <% end %>
+          <% if @reply_tasks.count !=0 %>
+            <%= link_to "・依頼していたタスクに #{@reply_tasks.count}件の返信があります。", user_tasks_request_reply_confirm_path(@user), remote: true, class: "request-alert" %>
+          <% end %>
+        </div>
+      </div>
+
+      <table class="table table-condensed table-hover" id="table-users">
+        <thead>
+          <tr>
+            <th>依頼主</th>
+            <th>件名</th>
+            <th>完了日（予定）</th>
+            <th>進捗状況</th>
+            <th></th>
+          </tr>
+        </thead>
+        <%= render partial: 'tasks_table', collection: @tasks, as: :task %>
+      </table>
+
+      <% if @tasks.blank?%>
+        <div class="task-none">
+          <a>該当のタスクはありません。</a>
+        </div>
+      <% end %>
+
+      <div class="paginate">
+        <%= paginate @tasks %>
+      </div>
+
+      <% if @btn_status == 'incomplete'%>
+        <div class='calendar'></div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!--タスク情報編集用モーダルウインドウ表示-->
+<div class="modal fade" id="task-edit" tabindex="-1" role="dialog" aria-labelledby="usereditModalLabel" aria-hidden="true"></div>
+<!--タスク詳細用モーダルウインドウ表示-->
+<div class="modal fade" id="task-show" tabindex="-1" role="dialog" aria-labelledby="usereditModalLabel" aria-hidden="true"></div>
+<!--依頼されたタスクに返信用モーダルウインドウ表示-->
+<div class="modal fade" id="tasks-request-reply" tabindex="-1" role="dialog" aria-labelledby="usereditModalLabel" aria-hidden="true"></div>
+<!--依頼していたタスクの返信確認用モーダルウインドウ表示-->
+<div class="modal fade" id="tasks_request_reply_confirm" tabindex="-1" role="dialog" aria-labelledby="usereditModalLabel" aria-hidden="true"></div>

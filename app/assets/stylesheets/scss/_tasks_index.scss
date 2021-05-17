@@ -1,0 +1,39 @@
+/* 新規作成、未完了、完了ボタン、依頼タスクアラートの位置と文字色 */
+.task-btn {
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  .task-btns {
+    text-align: left;
+    a {
+      margin-top: 6px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+/* タスク依頼関連アラートの色 */
+.request-related-info {
+  .request-alert {
+  color: red;
+  }
+}
+
+
+/* 編集、削除ボタンの位置 */
+.task-table-btns {
+  text-align: left;
+}
+
+// .task-table2 {
+//   border: 1px solid black;
+// }
+
+// .calendar-field {
+//   border: 1px solid black;
+// }
+
+
+
+// border: 1px solid black;

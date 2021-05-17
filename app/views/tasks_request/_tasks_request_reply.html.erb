@@ -1,0 +1,64 @@
+<div class="modal-dialog modal-dialog-fluid modal-dialog-center">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">依頼されたタスク一覧</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <%= form_tag(user_update_tasks_request_reply_path(@user), local: true, method: :patch) do %>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+              <thead>
+                <tr>
+                  <th>件名</th>
+                  <th>詳細</th>
+                  <th>開始日（予定）</th>
+                  <th>終了日（予定）</th>
+                  <th>依頼主</th>
+                  <th>依頼を承諾しますか？</th>
+                  <th>依頼主へのコメント</th>
+                </tr>
+              </thead>
+              <% @request_tasks.each do |task| %>
+                <tbody>
+                  <tr>
+                    <%= fields_for "request_tasks[]", task do |request_tasks|%>
+                      <% client = User.find(task.client) %>
+                      <td><%= task.title %></td>
+                      <td><%= task.details %></td>
+                      <td><%= task.start %></td>
+                      <td><%= task.end %></td>
+                      <td><%= client.name %></td>
+                      <td>
+                        <div class="task-radio-button">
+                          <%= request_tasks.radio_button :request_reply, :承諾 %>
+                          <%= request_tasks.label :request_reply, "はい", value: "承諾" %>
+
+                          <%= request_tasks.radio_button :request_reply, :拒否 %>
+                          <%= request_tasks.label :request_reply, "いいえ", value: "拒否" %>
+                        </div>
+                      </td>
+                      <td>
+                        <%= request_tasks.text_field :request_comment, class: "form-control"%>
+                      </td>
+                      <%= request_tasks.hidden_field :reply_confirm, :value => false %>
+                    <% end %>
+                  </tr>
+                </tbody>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">
+          キャンセル
+        </button>
+        <%= submit_tag "返信する", class: "btn btn-primary btn-edit" %>
+      </div>
+    <% end %>
+  </div>
+</div>

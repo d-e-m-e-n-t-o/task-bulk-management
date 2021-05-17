@@ -1,0 +1,66 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light header">
+  <%= link_to "Tas-kun", root_path, id: "logo", class: "navbar-brand" %>
+  <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "flash flash_#{key}") %>
+  <% end %>
+  <% if resource.errors.any? %>
+    <div id="error_explanation">
+      <h6>
+        <%= I18n.t("errors.messages.not_saved",
+                  count: resource.errors.count,
+                  resource: resource.class.model_name.human.downcase)
+        %>
+      </h6>
+    </div>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <% if current_user.admin? %>
+          <li class="nav-item">
+            <%= link_to users_path, class: "nav-link" do %>
+              <span class="sr-only">(current)</span>利用者一覧
+            <% end %>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              タスク依頼
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <%= link_to "新規依頼", new_user_tasks_request_path(current_user), remote: true, class: "dropdown-item" %>
+              <%= link_to "履歴依頼", user_tasks_request_all_history_path(current_user), data: {"turbolinks" => false}, class: "dropdown-item" %>
+            </div>
+          </li>
+        <% end %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            タスク一覧
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%#= link_to "未完了タスク一覧（個人）", user_tasks_path(current_user), class: "dropdown-item" %>
+            <%= link_to "未完了タスク一覧（全員）", user_tasks_all_incomplete_path(current_user), class: "dropdown-item" %>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.name %>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%= link_to "アカウント情報編集", edit_user_registration_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+</nav>
+
+<!--タスク依頼確認用モーダルウインドウ表示-->
+<div class="modal fade" id="task-request-new" tabindex="-1" role="dialog" aria-labelledby="usereditModalLabel" aria-hidden="true"></div>

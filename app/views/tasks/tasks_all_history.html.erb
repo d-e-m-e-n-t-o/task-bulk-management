@@ -1,0 +1,66 @@
+<% provide(:title, 'All_tasks_history') %>
+<div class="tasks-container container-fluid">
+  <div class="title">
+    <% if params[:search].present? %>
+      <h1>検索結果</h1>
+    <% else %>
+      <h1>タスク履歴（再登録）</h1>
+    <% end %>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="task-btn col-6">
+        <div class="task-btns">
+          <%= link_to "タスク登録（新規）", new_user_task_path(@user), remote: true, class: "btn btn-primary btn-sm" %>
+          <%= link_to "未完了", user_tasks_path(@user, btn_status: "incomplete"), class: "btn btn-primary btn-sm" %>
+          <%= link_to "完了", user_tasks_path(@user, btn_status: "completed"), class: "btn btn-primary btn-sm" %>
+          <% if current_user.admin? %>
+            <%= link_to "依頼", user_tasks_request_index_path(@user), class: "btn btn-primary btn-sm" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="user-search float-right">
+          <a id="search">タスク名検索</a>
+          <%= form_with url: user_tasks_request_all_history_path(@user), method: :get, local: true do |form| %>
+            <%= form.text_field :search, id: "search-box", placeholder: "キーワードを入力" %>
+            <%= form.submit "検索", id: "search-btn", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+      <table class="table table-condensed table-hover" id="table-users">
+        <thead>
+          <tr>
+            <th>件名</th>
+            <th>詳細</th>
+            <th>開始日（予定）</th>
+            <th>完了日（予定）</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tasks.each do |task| %>
+            <tr>
+              <td><%= task.title %></td>
+              <td><%= task.details %></td>
+              <td><%= task.start %></td>
+              <td><%= task.end %></td>
+              <td>
+                <%= link_to "再登録", edit_user_task_path(task.user_id, task.id, btn_status: "reregistration"), remote: true, class: "btn btn-primary btn-sm float-right", id: "task-request-btn" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="users-paginate">
+        <div class="paginate">
+          <%= paginate @tasks %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--タスク情報編集用モーダルウインドウ表示-->
+<div class="modal fade" id="task-edit" tabindex="-1" role="dialog" aria-labelledby="usereditModalLabel" aria-hidden="true"></div>

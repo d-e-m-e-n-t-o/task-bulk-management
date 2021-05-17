@@ -1,0 +1,24 @@
+<tbody>
+  <tr>
+    <td><%= task.title %></td>
+    <td><%= l(task.start, format: :long) %></td>
+    <td><%= l(task.end, format: :long) %></td>
+    <td><%= task.progress %>%</td>
+    <td><%= User.find(task.contractor).name %></td>
+    <td><%= task.request_reply %></td>
+    <td><%= task.request_comment %></td>
+    <td>
+      <div class="task-table-buns float-right">
+        <% if task.request_reply == '拒否'%>
+          <%= link_to "再依頼", edit_user_tasks_request_path(@user.id, task.id, btn_status: 're_request'), remote: true, class: "btn btn-primary btn-sm" %>
+        <% else %>
+          <%= link_to "編集", edit_user_tasks_request_path(@user.id, task.id), remote: true, class: "btn btn-primary btn-sm" %>
+        <% end %>
+        <% if (task.client == task.user_id) || (task.client == 0) %>
+          <%= link_to "削除", user_tasks_request_path(@user.id, task.id), method: :delete,data: { confirm: "#{task.title}を削除してよろしいですか？" }, class: "btn btn-danger btn-sm" %>
+        <% end %>
+        <%= link_to "詳細", user_tasks_request_path(@user.id, task.id), remote: true, class: "btn btn-primary btn-sm" %>
+      </div>
+    </td>
+  </tr>
+</tbody>

@@ -1,0 +1,8 @@
+$('#remote_container').html('<%= j render "new" %>');
+$('#new_event').modal('show');
+
+$(document).ready(function () {
+  $('#datePicker-start').datetimepicker({locale: 'ja', dayViewHeaderFormat: 'YYYY年M月' ,format: 'YYYY/MM/DD'});
+  $('#datePicker-end').datetimepicker({locale: 'ja', dayViewHeaderFormat: 'YYYY年M月' ,format: 'YYYY/MM/DD'});
+  // $('#timePicker').datetimepicker({locale: 'ja', format: 'HH:mm'});
+});

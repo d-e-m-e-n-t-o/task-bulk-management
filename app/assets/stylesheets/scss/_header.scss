@@ -1,0 +1,19 @@
+// .header {
+//   border: 1px solid black;
+// }
+
+#logo {
+  float: left;
+  font-size: 1.7em;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: bold;
+  color: rgb(71, 71, 71);
+}
+
+#logo:hover {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+/*border: 1px solid black;*/

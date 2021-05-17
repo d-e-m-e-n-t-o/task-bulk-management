@@ -1,0 +1,145 @@
+.box-inner {
+  padding: 0px 20px;
+}
+
+.box-name-login, .box-password-login {
+  margin-bottom: 13px;
+}
+
+.box-name-login label, .box-password-login label {
+  font-weight: 700;
+  font-size: 13px;
+  padding-left: 2px;
+  padding-bottom: 2px;
+}
+
+.box-name-login input[type="text"], .box-password-login input[type="password"] {
+  border-style: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 31px;
+  border: 1px solid #a6a6a6;
+  box-shadow: 0 1px 0 rgba(0,0,0,.07) inset;
+  border-radius: 3px;
+  padding: 0 7px;
+}
+
+.column-left {
+  float: left;
+}
+
+.column-right {
+  float: right;
+}
+
+.box-password-login a {
+  font-size: 13px;
+}
+
+.btn-logins {
+  margin-bottom: 13px;
+  animation: boxAnime 10s linear infinite alternate;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@keyframes boxAnime{
+  0% { width : auto }
+ 40% { width : auto }
+ 60% { width : auto }
+100% { width : auto }
+}
+
+.btn-logins div {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.btn-login {
+  margin-top: 3px;
+  border-style: none;
+  width: 100px;
+  height: 31px;
+  background: linear-gradient(to bottom,#f7dfa5,#f0c14b);
+  border-radius: 3px;
+  border: 1px #a88734 solid;
+}
+
+.btn-login:hover {
+  cursor: pointer;
+  /* background: #f0c14b; */
+}
+
+.btn-line-login {
+  margin-top: 3px;
+  border-style: none;
+  width: 100px;
+  height: 31px;
+  background: linear-gradient(to bottom,#00ff40,#009e08);
+  border-radius: 3px;
+  border: 1px #006b00 solid;
+}
+
+.btn-line-login:hover {
+  cursor: pointer;
+  /* background: #00a708; */
+}
+
+
+.remember {
+  font-size: 13px;
+}
+
+.remember label {
+  display:block;
+  position:relative;
+  padding-left:1.3em;
+}
+
+.remember label input{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  margin:auto;
+}
+
+.box-newusr {
+  margin-bottom: 13px;
+}
+
+.box-newusr p {
+  text-align: center;
+  font-size: 12px;
+  color: #767676;
+  margin-bottom: 14px;
+}
+
+.box-newusr p span {
+  text-decoration: line-through;
+  text-decoration-color: #e7e7e7;
+}
+
+.box-newusr a {
+  display: block;
+  width: 100%;
+  height: 31px;
+  font-size: 13px;
+  color: #111;
+  line-height: 31px;
+  text-align: center;
+  background: linear-gradient(to bottom,#f7f8fa,#e7e9ec);
+  border-radius: 3px;
+  border: 1px #a2a6ac solid;
+}
+
+.box-newusr a:hover {
+  background: #e7e9ec;
+}
+
+.legal-text {
+  font-size: 12px;
+  text-align: center;
+}
+
+/* border: 1px solid black; */

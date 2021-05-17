@@ -1,0 +1,149 @@
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require fullcalendar
+ *= require daterangepicker
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap";
+@import "font-awesome";
+@import "tempusdominus-bootstrap-4.css";
+@import "image";
+@import "scss/header";
+@import "scss/ssessions_new";
+@import "scss/registrations_edit";
+@import "scss/task_new_edit";
+@import "scss/error_messages";
+@import "scss/tasks_index";
+@import "scss/full_calendar";
+@import "scss/users_index";
+
+.title {
+  width: auto;
+}
+
+h1 {
+  position: relative;
+  font-size: 3em;
+  letter-spacing: -2px;
+  padding: 50px 65px 20px 65px;
+  text-align: center;
+  font-weight: bold;
+  color: rgb(71, 71, 71);
+}
+
+h6 {
+  text-align: center;
+  margin: auto;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+.table th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+textarea {
+  resize: vertical;
+}
+
+// 各種ボタンの設定
+.btn-new .btn-edit .btn-password {
+  border: 1px #0033be solid;
+}
+
+.btn-cancel {
+  color: rgb(255, 255, 255);
+  background-color: #c7c7c7;
+  border: 1px #999999 solid;
+}
+
+/* フラッシュメッセージの色 */
+.flash {
+  text-align: center;
+  &_alert{
+    color: rgb(255, 0, 0);
+    // background-color: red;
+  }
+  &_notice {
+    color: rgb(0, 201, 10);
+    // background-color: $blue;
+  }
+}
+
+/* ページネーションのデザイン */
+.pagination>li>a {
+  border: 1px solid #d3d3d3;
+  // border: none;     /*枠線をなくす*/
+  color: #5c5c5c;   /*文字の色を変える*/
+  // height: 30px;
+  // width: 30px;
+  margin: 1px 1px;
+  border-radius: 5px;
+}
+
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {
+  background: #93c9ff;     /*背景の色を変える*/
+  border-radius: 5px;     /*角を丸くする*/
+
+}
+
+/* ホバー時のデザイン */
+.pagination>li>a:hover {
+  border-radius: 5px;    /*角を丸くする*/
+}
+
+/* ページネーションのdiv */
+.paginate {
+  height: 42px;
+}
+
+// 依頼返信用モーダルサイズ
+.modal-dialog-fluid {
+  max-width: inherit;
+  width: 98%;
+  margin-left: 15px;
+}
+
+.task-radio-button {
+  padding-top: 5px;
+}
+
+
+/*border: 1px solid black;*/
+
+// .header-wrap {
+//   background-color: rgb(0, 0, 0);
+//   .header {
+//     background-color: rgb(0, 0, 0);
+//     h1 {
+//       margin: 0;
+//     }
+//     a {
+//       color: rgb(211, 209, 209);
+//       margin-left: 20px;
+//     }
+//   }
+// }

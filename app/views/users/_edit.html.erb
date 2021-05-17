@@ -1,0 +1,42 @@
+<div class="modal-dialog modal-md modal-dialog-center">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">アカウント情報編集</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <%= form_with(model: @user, url: user_path(@user), local: true, method: :patch) do |f| %>
+      <div class="modal-body">
+        <div class='box-name'>
+          <%= f.label :name, "氏名" %>
+          <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "最大10文字", maxlength: 10, required: true %>
+        </div>
+
+        <div class='box-email'>
+          <%= f.label :email, "メールアドレス" %>
+          <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "xxx@email.com", required: true %>
+        </div>
+
+        <div class='box-position'>
+          <%= f.label :position, "役職" %><br />
+          <%= f.text_field :position, autofocus: true, class: "form-control", autocomplete: "position" %>
+        </div>
+        <div class="user-radio-button">
+          <label>管理者権限</label>
+          <%= f.radio_button :admin, :true %>
+          <%= f.label :admin, "有", value: true %>
+
+          <%= f.radio_button :admin, :false %>
+          <%= f.label :admin, "無", value: false %>
+        </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">
+          キャンセル
+        </button>
+        <%= f.submit "変更する", class: "btn btn-primary btn-edit" %>
+      </div>
+    <% end %>
+  </div>
+</div>

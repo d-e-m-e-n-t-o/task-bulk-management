@@ -1,0 +1,22 @@
+<table class="table table-condensed table-hover" id="table-users">
+  <thead>
+    <tr>
+      <th>依頼主</th>
+      <th>件名</th>
+      <th>開始日（予定）</th>
+      <th>完了日（予定）</th>
+      <th>進捗状況</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task|%>
+      <tr>
+        <td><%= User.find(task.client).name if task.client != 0 %></td>
+        <td><%= task.title %></td>
+        <td><%= l(task.start, format: :long) %></td>
+        <td><%= l(task.end, format: :long) %></td>
+        <td><%= task.progress %>%</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

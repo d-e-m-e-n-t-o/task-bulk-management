@@ -13,17 +13,17 @@
 ActiveRecord::Schema.define(version: 2021_03_14_001310) do
 
   create_table "tasks", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.text "details"
     t.integer "client", default: 0
     t.integer "contractor", default: 0
-    t.string "task_status", default: "未完了"
-    t.integer "progress", default: 0
+    t.string "task_status", default: "未完了", null: false
+    t.integer "progress", default: 0, null: false
     t.string "request_reply", default: "未返答"
     t.string "request_comment"
     t.boolean "reply_confirm", default: false
-    t.date "start"
-    t.date "end"
+    t.date "start", null: false
+    t.date "end", null: false
     t.string "color"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false

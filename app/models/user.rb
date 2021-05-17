@@ -10,7 +10,7 @@ class User < ApplicationRecord
          :omniauthable,
          omniauth_providers: %i[line]
 
-  validates :name, presence: true, length: { maximum: 10 }
+  validates :name, presence: true, length: { maximum: 20 }
 
   def social_profile(provider)
     social_profiles.select { |sp| sp.provider == provider.to_s }.first

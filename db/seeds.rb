@@ -43,10 +43,10 @@ start = Date.current
 progress = 0
 users = User.all
 users.each do |user|
-  20.times do
+  10.times do
     title = "タスク#{t += 1}"
     details = "詳細#{d += 1}"
-    start += 1
+    start += 3
     finish = start + 3
     progress += 50
     progress = progress == 150 ? 0 : progress
@@ -68,10 +68,10 @@ start = Date.current
 progress = 0
 contractor = 1
 user = User.find(1)
-10.times do
+5.times do
   title = "タスク依頼#{t += 1}"
   details = "詳細依頼#{d += 1}"
-  start += 1
+  start += 3
   finish = start + 3
   progress = 0
   task_status = progress ='未完了'

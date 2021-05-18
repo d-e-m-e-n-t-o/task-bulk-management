@@ -10,14 +10,14 @@
 
 # 管理者登録
 User.create!(name: '管理者A',
-             email: 'sample-1@email.com',
+             email: 'sample-1@gmail.com',
              position: '店舗責任者',
              password: 'password',
              password_confirmation: 'password',
              admin: true)
 
 User.create!(name: '管理者B',
-             email: 'sample-2@email.com',
+             email: 'sample-2@gmail.com',
              position: 'マネージャー',
              password: 'password',
              password_confirmation: 'password',
@@ -25,8 +25,8 @@ User.create!(name: '管理者B',
 
 # 一般社員登録
 (2..19).each do |n|
-  name  = Faker::Name.name
-  email = "sample-#{n + 1}@email.com"
+  name  = Gimei.name.kanji
+  email = "sample-#{n + 1}@gmail.com"
   position = '一般社員'
   password = 'password'
   User.create!(name: name,
@@ -74,19 +74,30 @@ user = User.find(1)
   start += 3
   finish = start + 3
   progress = 0
-  task_status = progress ='未完了'
-  # progress = progress == 100 ? 0 : progress
-  # task_status = progress == 100 ? '完了' : '未完了'
+  task_status = '未完了'
   contractor += 1
-  contractor = contractor == 4 ? 2 : contractor
-  request_reply = '否認'
-  if request_reply == '未返答'
-    request_reply = '承認'
-  elsif request_reply == '承認'
-    request_reply = '否認'
+  case t
+  when 1, 4
+    request_reply = '承諾'
+  when 2, 5
+    request_reply = '拒否'
   else
     request_reply = '未返答'
   end
+
+  # if t == 1
+  #   request_reply = '承諾'
+  # elsif t == 2
+  #   request_reply = '拒否'
+  # elsif t == 3
+  #   request_reply = '未返答'
+  # elsif t == 4
+  #   request_reply = '承諾'
+  # elsif t == 5
+  #   request_reply = '拒否'
+  # end
+
+  reply_confirm = true if %w[承諾 拒否].include?(request_reply)
   request_comment = "タスク依頼コメント#{r += 1}"
   user.tasks.create!(title: title,
                      details: details,
@@ -97,5 +108,6 @@ user = User.find(1)
                      client: user.id,
                      contractor: contractor,
                      request_reply: request_reply,
+                     reply_confirm: reply_confirm,
                      request_comment: request_comment)
 end

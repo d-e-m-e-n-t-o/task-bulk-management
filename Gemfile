@@ -29,7 +29,6 @@ gem 'rack-cors'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.4'
 gem 'roo'
 gem 'sass-rails', '~> 5.0'
-gem 'sqlite3'
 gem 'thin'
 gem 'tod'
 gem 'turbolinks', '~> 5'
@@ -40,6 +39,7 @@ gem 'webpacker', '~> 5.0'
 group :development, :test do
   gem 'awesome_print'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'sqlite3'
 end
 
 group :development do

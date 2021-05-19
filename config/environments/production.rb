@@ -93,5 +93,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # 本番環境ではhost名を指定してね
-  # config.action_mailer.default_url_options = { host: 'xxxx.com' }
+  config.action_mailer.default_url_options = { host: 'https://git.heroku.com/taskbulkmanagement.git' }
+
+  config.assets.initialize_on_precompile = false
 end

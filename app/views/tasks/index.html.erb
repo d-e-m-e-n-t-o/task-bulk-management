@@ -37,7 +37,9 @@
             <th></th>
           </tr>
         </thead>
-        <%= render partial: 'tasks_table', collection: @tasks, as: :task %>
+        <% if @tasks.present?%>
+          <%= render partial: 'tasks_table', collection: @tasks, as: :task %>
+        <% end %>
       </table>
 
       <% if @tasks.blank?%>

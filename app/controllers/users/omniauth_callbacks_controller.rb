@@ -46,7 +46,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in(:user, @profile)
     end
     flash[:notice] = "ログインしました"
-    redirect_to new_user_session_path
+    redirect_to user_tasks_path(@profile)
   end
 
   def fake_email(uid, provider)

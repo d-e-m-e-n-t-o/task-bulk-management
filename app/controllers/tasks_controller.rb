@@ -15,13 +15,13 @@ class TasksController < ApplicationController
       end
     else
       @btn_status = 'incomplete'
-      tasks = @user.tasks.where(task_status: '未完了').where.not(client: @user.id)
-      request_tasks = Task.where('(request_reply = ?) AND (contractor = ?) AND (task_status = ?)', '承諾', @user.id, '未完了')
-      if request_tasks.present?
-        @tasks = Task.where(id: (tasks + request_tasks).map(&:id)).order("end").page(params[:page]).per(5)
-      else
-        @tasks = tasks.order("end").page(params[:page]).per(5)
-      end
+      @tasks = @user.tasks.where(task_status: '未完了').where.not(client: @user.id)
+      # request_tasks = Task.where('(request_reply = ?) AND (contractor = ?) AND (task_status = ?)', '承諾', @user.id, '未完了')
+      # if request_tasks.present?
+      #   @tasks = Task.where(id: (tasks + request_tasks).map(&:id)).order("end").page(params[:page]).per(5)
+      # else
+      #   @tasks = tasks.order("end").page(params[:page]).per(5)
+      # end
     end
     @request_tasks = Task.where('(request_reply = ?) AND (contractor = ?)', '未返答', @user.id) # タスク依頼アラート
     @reply_tasks = @user.tasks.where(reply_confirm: false).where('(request_reply = ?) OR (request_reply = ?)', '承諾', '拒否') # タスク返信アラート

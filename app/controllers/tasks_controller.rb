@@ -15,7 +15,18 @@ class TasksController < ApplicationController
       end
     else
       @btn_status = 'incomplete'
-      @tasks = @user.tasks.where(task_status: '未完了').where.not(client: @user.id)
+      tasks = @user.tasks.where(task_status: '未完了').where.not(client: @user.id)
+      request_tasks = Task.where('(request_reply = ?) AND (contractor = ?) AND (task_status = ?)', '承諾', @user.id, '未完了')
+      tasks_id = (tasks + request_tasks).map(&:id)
+      if tasks.present? || request_tasks.present?
+        @tasks = Task.where(id: tasks_id).order("end").page(params[:page]).per(5)
+      elsif tasks.present?
+        @tasks = tasks.order("end").page(params[:page]).per(5)
+      else
+        @tasks = tasks
+      end
+
+      # tasks = @user.tasks.where(task_status: '未完了').where.not(client: @user.id)
       # request_tasks = Task.where('(request_reply = ?) AND (contractor = ?) AND (task_status = ?)', '承諾', @user.id, '未完了')
       # if request_tasks.present?
       #   @tasks = Task.where(id: (tasks + request_tasks).map(&:id)).order("end").page(params[:page]).per(5)

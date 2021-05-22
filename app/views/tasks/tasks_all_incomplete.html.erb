@@ -64,9 +64,11 @@
       </table>
 
       <div class="users-paginate">
-        <div class="paginate">
-          <%= paginate @tasks %>
-        </div>
+        <% if @tasks.present?%>
+          <div class="paginate">
+            <%= paginate @tasks %>
+          </div>
+        <% end %>
       </div>
 
     </div>

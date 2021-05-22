@@ -11,9 +11,11 @@
   <div class="container">
     <div class="row">
       <div class="users-paginate col-6">
-        <div class="paginate">
-          <%= paginate @users %>
-        </div>
+        <% if @tasks.present?%>
+          <div class="paginate">
+            <%= paginate @users %>
+          </div>
+        <% end %>
       </div>
       <div class="col-6">
         <div class="user-search float-right">

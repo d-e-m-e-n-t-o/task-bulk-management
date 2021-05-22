@@ -19,7 +19,7 @@ class TasksController < ApplicationController
       request_tasks = Task.where('(request_reply = ?) AND (contractor = ?) AND (task_status = ?)', '承諾', @user.id, '未完了')
       tasks_id = (tasks + request_tasks).map(&:id)
       if tasks.present? || request_tasks.present?
-        @tasks = Task.where(id: tasks_id).order("end").page(params[:page]).per(5)
+        @tasks = Task.where(id: tasks_id).order('end').page(params[:page]).per(5)
       elsif tasks.present?
         @tasks = tasks.order("end").page(params[:page]).per(5)
       else

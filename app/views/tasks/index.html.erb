@@ -45,9 +45,11 @@
           <a>該当のタスクはありません。</a>
         </div>
       <% end %>
-      <div class="paginate">
-        <%= paginate @tasks %>
-      </div>
+      <% if @tasks.present?%>
+        <div class="paginate">
+          <%= paginate @tasks %>
+        </div>
+      <% end %>
       <% if @btn_status == 'incomplete'%>
         <div class='calendar'></div>
       <% end %>

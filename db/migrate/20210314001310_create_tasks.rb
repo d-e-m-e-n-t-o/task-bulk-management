@@ -11,7 +11,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.string :request_comment
       t.boolean :reply_confirm, default: 'false'
       t.date :start, null: false
-      t.date :end, null: false
+      t.date :end_at, null: false
       t.string :color
       t.references :user, null: false, foreign_key: true
 

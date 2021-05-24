@@ -1,30 +1,29 @@
 <% provide(:title, "All_tasks_request") %>
 <div class="tasks-container container-fluid">
   <div class="title"><h1>タスク一覧（依頼）</h1></div>
-  <div class="container">
-    <div class="row">
-      <div class="task-btn col-6"">
-        <div class="task-btns">
-          <%= link_to "タスク登録（新規）", new_user_task_path(@user), remote: true, class: "btn btn-primary btn-sm" %>
-          <%= link_to "タスク登録（履歴）", user_tasks_all_history_path(@user), class: "btn btn-primary btn-sm" %>
-          <%= link_to "未完了", user_tasks_path(@user, btn_status: "incomplete"), class: "btn btn-primary btn-sm" %>
-          <%= link_to "完了", user_tasks_path(@user, btn_status: "completed"), class: "btn btn-primary btn-sm" %>
-        </div>
+  <div class="row">
+    <div class="task-btn col-6"">
+      <div class="task-btns">
+        <%= link_to "タスク登録（新規）", new_user_task_path(@user), remote: true, class: "btn btn-primary btn-sm" %>
+        <%= link_to "タスク登録（履歴）", user_tasks_all_history_path(@user), class: "btn btn-primary btn-sm" %>
+        <%= link_to "未完了", user_tasks_path(@user, btn_status: "incomplete"), class: "btn btn-primary btn-sm" %>
+        <%= link_to "完了", user_tasks_path(@user, btn_status: "completed"), class: "btn btn-primary btn-sm" %>
       </div>
-      <div class="col-6">
-        <div class="user-search float-right">
-          <a id="search">タスク名検索</a>
-          <%= form_with url: user_tasks_request_all_history_path(@user), method: :get, local: true do |form| %>
-            <%= form.text_field :search, id: "search-box", placeholder: "キーワードを入力" %>
-            <%= form.submit "検索", id: "search-btn", class: "btn btn-primary" %>
-          <% end %>
-        </div>
+    </div>
+    <div class="col-6">
+      <div class="user-search float-right">
+        <a id="search">タスク名検索</a>
+        <%= form_with url: user_tasks_request_all_history_path(@user), method: :get, local: true do |form| %>
+          <%= form.text_field :search, id: "search-box", placeholder: "キーワードを入力" %>
+          <%= form.submit "検索", id: "search-btn", class: "btn btn-primary" %>
+        <% end %>
       </div>
+    </div>
+    <div class="table-responsive">
       <table class="table table-condensed table-hover" id="table-users">
         <thead>
           <tr>
             <th>件名</th>
-
             <th>開始日（予定）</th>
             <th>完了日（予定）</th>
             <th>進捗度</th>

@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_03_14_001310) do
     t.string "request_comment"
     t.boolean "reply_confirm", default: false
     t.date "start", null: false
-    t.date "end", null: false
+    t.date "end_at", null: false
     t.string "color"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false

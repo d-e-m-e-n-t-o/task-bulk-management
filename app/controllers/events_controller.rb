@@ -40,6 +40,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:task).permit(:title, :date_range, :start, :end, :color, :details, :client, :task_status, :progress)
+    params.require(:task).permit(:title, :date_range, :start, :end_at, :color, :details, :client, :task_status, :progress)
   end
 end

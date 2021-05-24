@@ -8,6 +8,21 @@
     text-align: left;
     a {
       margin-top: 6px;
+      margin-left: 5px;
+    }
+  }
+}
+
+.task-btn {
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  .task-btns-inc-com {
+    text-align: left;
+    a {
+      margin-top: 6px;
+      margin-left: 5px;
       margin-bottom: 10px;
     }
   }

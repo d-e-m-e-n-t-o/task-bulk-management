@@ -9,9 +9,9 @@ class TasksController < ApplicationController
       tasks = @user.tasks.where(task_status: '完了')
       request_tasks = Task.where('(request_reply = ?) AND (contractor = ?) AND (task_status = ?)', '承諾', @user.id, '完了')
       if request_tasks.present?
-        @tasks = Task.where(id: (tasks + request_tasks).map(&:id)).order("end DESC").page(params[:page]).per(10)
+        @tasks = Task.where(id: (tasks + request_tasks).map(&:id)).order(end_ta: :DESC).page(params[:page]).per(10)
       else
-        @tasks = tasks.order("end DESC").page(params[:page]).per(10)
+        @tasks = tasks.order("end_at DESC").page(params[:page]).per(10)
       end
     else
       @btn_status = 'incomplete'
@@ -19,9 +19,9 @@ class TasksController < ApplicationController
       request_tasks = Task.where('(request_reply = ?) AND (contractor = ?) AND (task_status = ?)', '承諾', @user.id, '未完了')
       tasks_id = (tasks + request_tasks).map(&:id)
       if tasks.present? || request_tasks.present?
-        @tasks = Task.where(id: tasks_id).page(params[:page]).per(5)
+        @tasks = Task.where(id: tasks_id).order(:end_at).page(params[:page]).per(5)
       elsif tasks.present?
-        @tasks = tasks.order("end").page(params[:page]).per(5)
+        @tasks = tasks.order("end_at").page(params[:page]).per(5)
       else
         @tasks = tasks
       end
@@ -103,19 +103,19 @@ class TasksController < ApplicationController
   def tasks_all_incomplete
     @tasks =
       if params[:search].present?
-        Task.where('name LIKE ?', "%#{params[:search]}%").where(task_status: '未完了').where.not('(request_reply = ?) OR (request_reply = ?)', '未返信', '拒否').order("end").page(params[:page]).per(10)
+        Task.where('name LIKE ?', "%#{params[:search]}%").where(task_status: '未完了').where.not('(request_reply = ?) OR (request_reply = ?)', '未返信', '拒否').order("end_at").page(params[:page]).per(10)
       else
-        Task.where(task_status: '未完了').where.not('(request_reply = ?) OR (request_reply = ?)', '未返信', '拒否').order("end").page(params[:page]).per(10)
+        Task.where(task_status: '未完了').where.not('(request_reply = ?) OR (request_reply = ?)', '未返信', '拒否').order("end_at").page(params[:page]).per(10)
       end
   end
 
   private
 
   def tasks_create_params
-    params.require(:task).permit(:title, :details, :task_status, :progress, :start, :end)
+    params.require(:task).permit(:title, :details, :task_status, :progress, :start, :end_at)
   end
 
   def tasks_update_params
-    params.require(:task).permit(:title, :details, :task_status, :progress, :start, :end)
+    params.require(:task).permit(:title, :details, :task_status, :progress, :start, :end_at)
   end
 end

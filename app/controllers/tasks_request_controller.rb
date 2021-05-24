@@ -6,9 +6,9 @@ class TasksRequestController < ApplicationController
   def index
     @tasks =
       if params[:search].present?
-        Task.where('name LIKE ?', "%#{params[:search]}%").where(client: @user.id).where(task_status: '未完了').order("end").page(params[:page]).per(10)
+        Task.where('name LIKE ?', "%#{params[:search]}%").where(client: @user.id).where(task_status: '未完了').order("end_at").page(params[:page]).per(10)
       else
-        Task.where(client: @user.id).page(params[:page]).order("end").per(10)
+        Task.where(client: @user.id).page(params[:page]).order("end_at").per(10)
       end
   end
 
@@ -73,7 +73,7 @@ class TasksRequestController < ApplicationController
 
   # 依頼されたタスク表示用
   def tasks_request_reply
-    @request_tasks = Task.where('(request_reply = ?) AND (contractor = ?)', '未返答', @user.id).order("end")
+    @request_tasks = Task.where('(request_reply = ?) AND (contractor = ?)', '未返答', @user.id).order("end_at")
   end
 
   # 依頼されたタスクに対しての返信用
@@ -91,7 +91,7 @@ class TasksRequestController < ApplicationController
 
   # 依頼したタスクに対しての返信確認用
   def tasks_request_reply_confirm
-    @reply_tasks = @user.tasks.where(reply_confirm: false).where('(request_reply = ?) OR (request_reply = ?)', '承諾', '拒否').order("end")
+    @reply_tasks = @user.tasks.where(reply_confirm: false).where('(request_reply = ?) OR (request_reply = ?)', '承諾', '拒否').order("end_at")
     @reply_tasks.update(reply_confirm: true)
   end
 
@@ -99,11 +99,11 @@ class TasksRequestController < ApplicationController
   private
 
   def tasks_request_create_params
-    params.require(:task).permit(:title, :details, :client, :contractor, :task_status, :progress, :request_reply, :start, :end)
+    params.require(:task).permit(:title, :details, :client, :contractor, :task_status, :progress, :request_reply, :start, :end_at)
   end
 
   def tasks_request_update_params
-    params.require(:task).permit(:title, :details, :client, :contractor, :task_status, :progress, :request_reply, :start, :end, :request_comment)
+    params.require(:task).permit(:title, :details, :client, :contractor, :task_status, :progress, :request_reply, :start, :end_at, :request_comment)
   end
 
   def update_tasks_request_reply_params

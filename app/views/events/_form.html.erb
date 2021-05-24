@@ -24,9 +24,9 @@
           </div>
         </div>
         <div class="col-6 box-end">
-          <%= f.label :end, "完了日（予定）" %>
+          <%= f.label :end_at, "完了日（予定）" %>
           <div class="input-group date" id="datePicker-end" data-target-input="nearest">
-          <%= f.text_field :end, class: "form-control datetimepicker-input end_hidden", data: {toggle: "datetimepicker", target: "#datePicker-end"} %>
+          <%= f.text_field :end_at, class: "form-control datetimepicker-input end_hidden", data: {toggle: "datetimepicker", target: "#datePicker-end"} %>
             <div class="input-group-append" data-target="#datePicker-end" data-toggle="datetimepicker">
               <div class="input-group-text"><i class="fa fa-calendar"></i></div>
             </div>

@@ -53,7 +53,7 @@
                 <td><%= User.find(task.user_id).name %></td>
               <% end %>
               <td>
-                <%= link_to "再依頼", edit_user_tasks_request_path(@user.id, task.id, btn_status: "re_request"), remote: true, class: "btn btn-primary btn-sm", id: "task-request-btn" %>
+                <%= link_to "依頼", edit_user_tasks_request_path(@user.id, task.id, btn_status: "re_request"), remote: true, class: "btn btn-primary btn-sm", id: "task-request-btn" %>
               </td>
             </tr>
           <% end %>

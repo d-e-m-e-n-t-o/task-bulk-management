@@ -2,6 +2,7 @@
   <tr>
     <td><%= User.find(task.client).name if task.client != 0 %></td>
     <td><%= task.title %></td>
+    <td><%= l(task.start, format: :long) %></td>
     <td><%= l(task.end_at, format: :long) %></td>
     <td><%= task.progress %>%</td>
     <td>

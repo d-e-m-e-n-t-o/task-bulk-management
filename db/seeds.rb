@@ -24,7 +24,7 @@ User.create!(name: '管理者B',
              admin: true)
 
 User.create!(name: '一般A',
-             email: 'sample-2@gmail.com',
+             email: 'sample-3@gmail.com',
              position: '正社員',
              password: 'password',
              password_confirmation: 'password')

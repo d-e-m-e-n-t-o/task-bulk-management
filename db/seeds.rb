@@ -23,8 +23,14 @@ User.create!(name: '管理者B',
              password_confirmation: 'password',
              admin: true)
 
+User.create!(name: '一般A',
+             email: 'sample-2@gmail.com',
+             position: '正社員',
+             password: 'password',
+             password_confirmation: 'password')
+
 # 一般社員登録
-(2..19).each do |n|
+(3..19).each do |n|
   name  = Gimei.name.kanji
   email = "sample-#{n + 1}@gmail.com"
   position = '一般社員'

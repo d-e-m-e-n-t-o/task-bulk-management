@@ -39,7 +39,7 @@ end
 # タスク登録
 t = 0
 d = 0
-start = Date.current
+start = Date.new(2021, 6, 1)
 progress = 0
 users = User.all
 users.each do |user|
